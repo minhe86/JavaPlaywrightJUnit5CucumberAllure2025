@@ -10,6 +10,7 @@ import e2e.pages.components.SideNavigationMenu;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Allure;
 import utils.CSVUtils;
 import utils.Product;
 
@@ -27,14 +28,12 @@ public class LoginLogout {
 //    Browser browser = chrome.launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(200));
 //    this.page = browser.newPage();
 
-    String browserName = "chrome";
-    DriverFactory.multipleBrowserSetup(browserName);
     this.page = DriverFactory.getPage();
   }
 
   @Given("User launches SwagLabs application")
   public void launchApp() throws Exception {
-    page.navigate("https://www.saucedemo.com/");
+    this.page.navigate("https://www.saucedemo.com/");
     // Create page dynamically based on pageName
     Component component = PageFactory.createPage("Login", this.page);
     component.verifyDetails();
@@ -58,6 +57,7 @@ public class LoginLogout {
     products = CSVUtils.readProductCSV(csvFilePath);
 
     Home home = new Home(this.page);
+    Allure.addAttachment("Products details", String.valueOf(products));
     home.verifyProductsDetails(products);
   }
 
@@ -72,6 +72,7 @@ public class LoginLogout {
       .orElseThrow(() -> new RuntimeException("Product with productNo " + productNo + " not found"));
 
     Home home = new Home(this.page);
+    Allure.addAttachment("Product details", String.valueOf(product));
     home.verifyProductDetails(product);
   }
 

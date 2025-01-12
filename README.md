@@ -39,6 +39,15 @@
 
 <h2 id="Screenshots">Screenshots</h2>
 
+Please refer to /screenshots/.
+
+### [Passed Allure Result](screenshots/allure-result-1.png)
+![](screenshots/allure-result-1.png)
+
+
+### [Failed Allure Result](screenshots/allure-result-2.png)
+![](screenshots/allure-result-2.png)
+
 
 <h2 id="license">License</h2>
 <p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
