@@ -41,12 +41,12 @@
 
 Please refer to /screenshots/.
 
-### [Passed Allure Result](screenshots/allure-result1.png)
-![](screenshots/allure-result1.png)
+### [Passed Allure Result](screenshots/allure-result-1.png)
+![](screenshots/allure-result-1.png)
 
 
-### [Failed Allure Result](screenshots/allure-result2.png)
-![](screenshots/allure-result2.png)
+### [Failed Allure Result](screenshots/allure-result-2.png)
+![](screenshots/allure-result-2.png)
 
 
 <h2 id="license">License</h2>
