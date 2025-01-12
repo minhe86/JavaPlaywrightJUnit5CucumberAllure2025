@@ -9,7 +9,7 @@ public class ConfigReader {
   public Properties initProp() {
     Properties properties = new Properties();
     try {
-      FileInputStream fileInputStream = new FileInputStream("./src/test/resources/config/config.default.properties");
+      FileInputStream fileInputStream = new FileInputStream("./src/test/resources/configs/config.default.properties");
       properties.load(fileInputStream);
     } catch (Exception e) {
       System.out.println("Unable to read Properties file.");
