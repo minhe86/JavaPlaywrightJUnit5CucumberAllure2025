@@ -1,69 +1,48 @@
 package e2e;
 
 import com.microsoft.playwright.*;
-import io.qameta.allure.Allure;
 import utils.Helpers;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
 public class DriverFactory {
-  private static Browser browser;
-  private static BrowserContext context;
-  private static Page page;
+  public static Browser browser;
+  public static BrowserContext context;
+  public static Page page;
 
-  public static void multipleBrowserSetup(String browserName) {
-    Playwright playwright = Playwright.create();
+  public static ThreadLocal<Page> threadLocalDriver = new ThreadLocal<>();
+  public static ThreadLocal<BrowserContext> threadLocalContext = new ThreadLocal<>();
+
+  public Page initDriver(String browserName) {
+    BrowserType browserType = null;
     boolean headless = Boolean.parseBoolean(Helpers.getProperty("headless"));
-
-    switch (browserName.toLowerCase()) {
-      case "chrome":
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-          .setHeadless(headless)
-          .setSlowMo(100));
-        break;
+    switch (browserName) {
       case "firefox":
-        browser = playwright.firefox().launch(new BrowserType.LaunchOptions()
-          .setHeadless(headless)
-          .setSlowMo(100));
+        browserType = Playwright.create().firefox();
+        browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(headless));
+        break;
+      case "chrome":
+        browserType = Playwright.create().chromium();
+        browser = browserType.launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(headless));
         break;
       case "webkit":
-        browser = playwright.webkit().launch(new BrowserType.LaunchOptions()
-          .setHeadless(headless)
-          .setSlowMo(100));
+        browserType = Playwright.create().webkit();
+        browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(headless));
         break;
-      default:
-        throw new IllegalArgumentException("Unsupported browser: " + browserName);
     }
-
+    if (browserType == null) throw new IllegalArgumentException("Could not Launch Browser for type" + browserType);
     context = browser.newContext();
+    context.tracing().start(new Tracing.StartOptions().setScreenshots(true).setSnapshots(true).setSources(false));
     page = context.newPage();
-  }
-
-  public static void tearDown() {
-    System.out.println("Closing context and browser...");
-    if (page != null) {
-      page.close();
-    }
-    if (context != null) {
-      context.close();
-    }
-    if (browser != null) {
-      browser.close();
-    }
-  }
-
-  public static Page getPage() {
+    threadLocalDriver.set(page);
+    threadLocalContext.set(context);
     return page;
   }
 
-  public static void captureScreenshot(String name) {
-    byte[] screenshotBytes = page.screenshot(new Page.ScreenshotOptions().setFullPage(true));
-    try (InputStream is = new ByteArrayInputStream(screenshotBytes)) {
-      Allure.addAttachment(name, "image/png", is, "png");
-    } catch (Exception e) {
-      throw new RuntimeException("Failed to attach screenshot to Allure report", e);
-    }
+  public static synchronized Page getPage() {
+    return threadLocalDriver.get();
+  }
+
+  public static synchronized BrowserContext getContext() {
+    return threadLocalContext.get();
   }
 
 }

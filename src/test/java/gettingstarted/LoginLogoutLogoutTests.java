@@ -42,7 +42,7 @@ public class LoginLogoutLogoutTests {
         page.getByAltText("menu").click();
         page.getByText("sign out").click();
 //        PlaywrightAssertions.assertThat(page).hasURL(Pattern.compile("login"));
-        Assert.assertTrue(page.url().contains("login --- wrong"));
+        Assert.assertTrue(page.url().contains("login"));
 //        page.waitForTimeout(3*1000);
         System.out.println("I am inside loginTest end");
       }
