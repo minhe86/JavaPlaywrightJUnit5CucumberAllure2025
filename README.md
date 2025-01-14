@@ -13,7 +13,7 @@
   <li><strong>JUnit5</strong>: A testing framework used to run tests and manage assertions.</li>
   <li><strong>Allure</strong>: A reporting tool to generate test execution reports.</li>
   <li><strong>Git</strong>: Version control for managing the project.</li>
-  <li><strong>Notes</strong>: This is still an ongoing project, current purpose is for skills pickup and demonstration. Learn Java Playwright by this project (e2e dir is for automation framework, gettingstarted dir is for Java, Playwright learning), try to cover passing test data via different ways: cucumber step argument, data table, csv file; support dynamic page factory, dynamic getLocators...</li>
+  <li><strong>Notes</strong>: This is still an ongoing project, current purpose is for skills pickup and demonstration. Learn Java Playwright by this project (e2e dir is for automation framework, gettingstarted dir is for Java, Playwright learning), try to cover passing test data via different ways: cucumber step argument, data table, csv file; support dynamic page factory, dynamic getLocators, API verification, Accessibility check, attach test data into allure report for debugging......</li>
 </ul>
 
 
@@ -44,10 +44,12 @@ Please refer to /screenshots/.
 ### [Passed Allure Result](screenshots/allure-result-1.png)
 ![](screenshots/allure-result-1.png)
 
-
 ### [Failed Allure Result](screenshots/allure-result-2.png)
 ![](screenshots/allure-result-2.png)
 
+### [Passed Allure Result - API](screenshots/allure-result-3.png)
+![](screenshots/allure-result-3.png)
 
-<h2 id="license">License</h2>
-<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
+### [Failed Allure Result - Accessibility Check](screenshots/allure-result-4.png)
+![](screenshots/allure-result-4.png)
+
