@@ -21,6 +21,7 @@ public class Login extends Component {
   }
 
   @Override
+  @Test
   public void waitForDisplayed() {
     username.waitFor();
     password.waitFor();
@@ -28,6 +29,7 @@ public class Login extends Component {
   }
 
   @Override
+  @Test
   public void verifyDetails() {
     Assert.assertTrue(username.isEditable());
     Assert.assertTrue(password.isEditable());

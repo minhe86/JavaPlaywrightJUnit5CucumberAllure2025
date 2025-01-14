@@ -10,6 +10,7 @@ import e2e.pages.components.SideNavigationMenu;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Allure;
 import utils.CSVUtils;
 import utils.Product;
 
@@ -56,6 +57,7 @@ public class LoginLogout {
     products = CSVUtils.readProductCSV(csvFilePath);
 
     Home home = new Home(this.page);
+    Allure.addAttachment("Products details", String.valueOf(products));
     home.verifyProductsDetails(products);
   }
 
@@ -70,6 +72,7 @@ public class LoginLogout {
       .orElseThrow(() -> new RuntimeException("Product with productNo " + productNo + " not found"));
 
     Home home = new Home(this.page);
+    Allure.addAttachment("Product details", String.valueOf(product));
     home.verifyProductDetails(product);
   }
 
