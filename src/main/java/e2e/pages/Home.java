@@ -3,13 +3,12 @@ package e2e.pages;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import e2e.pages.components.Component;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 import utils.Helpers;
 import utils.Product;
-
 import java.text.DecimalFormat;
 import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Home extends Component {
 
@@ -79,7 +78,8 @@ public class Home extends Component {
     productDescription1.waitFor();
     productPrice1.waitFor();
     productAddRemoveButton1.waitFor();
-    Assert.assertTrue(Helpers.waitUntilElementDisplayed(burgerMenu, 3));
+//    Assert.assertTrue(Helpers.waitUntilElementDisplayed(burgerMenu, 3));
+    assertTrue(Helpers.waitUntilElementDisplayed(burgerMenu, 3));
   }
 
   @Override
@@ -88,27 +88,27 @@ public class Home extends Component {
     if (!productName1.isVisible()) {
       throw new RuntimeException("Product 1 is not available.");
     }
-    Assert.assertTrue(productName1.isVisible());
-    Assert.assertTrue(productDescription1.isVisible());
-    Assert.assertTrue(productPrice1.isVisible());
-    Assert.assertTrue(productAddRemoveButton1.isEnabled());
-    Assert.assertEquals(page.title(), "Swag Labs");
+    assertTrue(productName1.isVisible());
+    assertTrue(productDescription1.isVisible());
+    assertTrue(productPrice1.isVisible());
+    assertTrue(productAddRemoveButton1.isEnabled());
+    assertEquals("Swag Labs", page.title());
   }
 
   @Test
   public void verifyProductName(String productName) {
-    Assert.assertEquals(productName1.textContent(), productName);
+    assertEquals(productName1.textContent(), productName);
   }
 
   @Test
   public void verifyProductDetails(Product product) {
     ProductLocators productLocators = getProductLocators(product.productNo());
 
-    Assert.assertEquals(productLocators.productName.textContent(), product.productName());
-    Assert.assertEquals(productLocators.productDescription.textContent(), product.productDescription());
+    assertEquals(productLocators.productName.textContent(), product.productName());
+    assertEquals(productLocators.productDescription.textContent(), product.productDescription());
     String expectedPrice = "$" + new DecimalFormat("#.##").format(product.productPrice());
-    Assert.assertEquals(productLocators.productPrice.textContent().trim(), expectedPrice);
-    Assert.assertTrue(productLocators.productAddRemoveButton.isEnabled());
+    assertEquals(productLocators.productPrice.textContent().trim(), expectedPrice);
+    assertTrue(productLocators.productAddRemoveButton.isEnabled());
   }
 
   @Test
@@ -120,7 +120,7 @@ public class Home extends Component {
 
   @Test
   public void navigateToSideMenu() {
-    Assert.assertTrue(burgerMenu.isVisible());
+    assertTrue(burgerMenu.isVisible());
     burgerMenu.click();
   }
 

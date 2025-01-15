@@ -1,7 +1,8 @@
 package e2e.pages.components;
 
 import com.microsoft.playwright.Page;
-import org.testng.Assert;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class SideNavigationMenu extends Component {
 
@@ -15,16 +16,17 @@ public class SideNavigationMenu extends Component {
   }
 
   @Override
+  @Test
   public void waitForDisplayed() {
-    Assert.assertTrue(page.locator(this.crossButton).isVisible());
-    Assert.assertTrue(page.locator(this.logoutLink).isVisible());
+    assertTrue(page.locator(this.crossButton).isVisible());
+    assertTrue(page.locator(this.logoutLink).isVisible());
   }
 
   @Override
   public void verifyDetails() {
-    Assert.assertTrue(page.locator(this.allItemsLink).isVisible());
-    Assert.assertEquals(page.locator(this.aboutLink).getAttribute("href"), "https://saucelabs.com/");
-    Assert.assertTrue(page.locator(this.logoutLink).isVisible());
+    assertTrue(page.locator(this.allItemsLink).isVisible());
+    assertEquals("https://saucelabs.com/", page.locator(this.aboutLink).getAttribute("href"));
+    assertTrue(page.locator(this.logoutLink).isVisible());
   }
 
   public void logout() {

@@ -3,8 +3,8 @@ package e2e.pages;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import e2e.pages.components.Component;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Login extends Component {
 
@@ -31,12 +31,12 @@ public class Login extends Component {
   @Override
   @Test
   public void verifyDetails() {
-    Assert.assertTrue(username.isEditable());
-    Assert.assertTrue(password.isEditable());
+    assertTrue(username.isEditable());
+    assertTrue(password.isEditable());
     if (!loginButton.isEnabled()) {
       throw new RuntimeException("Login button is not clickable.");
     }
-    Assert.assertEquals(page.title(), "Swag Labs");
+    assertEquals("Swag Labs", page.title());
   }
 
   @Test

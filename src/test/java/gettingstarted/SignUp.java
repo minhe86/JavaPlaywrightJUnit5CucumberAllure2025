@@ -3,12 +3,10 @@ package gettingstarted;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
-import com.microsoft.playwright.assertions.PlaywrightAssertions;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class SignUp {
   @Test
@@ -33,11 +31,11 @@ public class SignUp {
 //        PlaywrightAssertions.assertThat(page).hasTitle("Learn Automation Courses");
 //        PlaywrightAssertions.assertThat(page.locator(".welcomeMessage")).containsText("Welcome");
 //        PlaywrightAssertions.assertThat(page).hasURL(Pattern.compile("login"));
-        Assert.assertTrue(title.contains("Learn Automation Courses"));
+        assertTrue(title.contains("Learn Automation Courses"));
 
         page.locator(".subLink").click();
-        Assert.assertTrue(page.url().contains("signup"));
-        Assert.assertTrue(page.locator("button[type='submit']").isDisabled());
+        assertTrue(page.url().contains("signup"));
+        assertTrue(page.locator("button[type='submit']").isDisabled());
 
         Name name = new Faker().name();
         page.locator("input[name='name']").fill(name.fullName());
@@ -47,16 +45,16 @@ public class SignUp {
         page.getByLabel("Playwright",  new Page.GetByLabelOptions().setExact(true)).click();
 //        page.getByText("Playwright", new Page.GetByTextOptions().setExact(true)).click();
 //        page.waitForTimeout(3*1000);
-        Assert.assertTrue(page.locator("xpath=//label[text()='Playwright']//preceding::input[1]").isChecked());
+        assertTrue(page.locator("xpath=//label[text()='Playwright']//preceding::input[1]").isChecked());
 
         page.getByText("API Testing").click();
-        Assert.assertTrue(page.locator("xpath=//label[text()='API Testing']//preceding::input[1]").isChecked());
+        assertTrue(page.locator("xpath=//label[text()='API Testing']//preceding::input[1]").isChecked());
 
         page.getByText("Selenium").click();
-        Assert.assertTrue(page.locator("xpath=//label[text()='Selenium']//preceding::input[1]").isChecked());
+        assertTrue(page.locator("xpath=//label[text()='Selenium']//preceding::input[1]").isChecked());
 
         page.locator("input[value='Female']").click();
-        Assert.assertTrue(page.locator("input[value='Female']").isChecked());
+        assertTrue(page.locator("input[value='Female']").isChecked());
 
 //        page.locator("#state").selectOption("Kerala");
         page.locator("select[name='state']").selectOption("Kerala");
@@ -64,14 +62,14 @@ public class SignUp {
         String hobbies[] = {"Playing","Swimming"};
         page.locator("select[name='hobbies']").selectOption(hobbies);
 
-        Assert.assertTrue(page.locator("button[type='submit']").isEnabled());
+        assertTrue(page.locator("button[type='submit']").isEnabled());
 //        page.pause();
         page.locator("button[type='submit']").click();
 
         // if not wait, still check in the previous page, how to fix it? using new page???
         page.waitForTimeout(1*1000);
-        Assert.assertTrue(page.getByText("Signup successfully, Please").isVisible());
-        Assert.assertTrue(page.url().contains("login"));
+        assertTrue(page.getByText("Signup successfully, Please").isVisible());
+        assertTrue(page.url().contains("login"));
 
         System.out.println("I am inside Sign Up end");
 //        page.waitForTimeout(10*1000);

@@ -1,8 +1,8 @@
 package gettingstarted;
 
 import com.microsoft.playwright.*;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GoogleSearchAutoSuggestion {
   @Test
@@ -22,7 +22,7 @@ public class GoogleSearchAutoSuggestion {
         page.navigate("https://www.google.com/");
 
         String title = page.title();
-        Assert.assertTrue(title.contains("Google"));
+        assertTrue(title.contains("Google"));
 
         page.locator("textarea[name='q']").fill("Playwright Java");
 //        page.locator("xpath=//textarea[@title='Search']").fill("Playwright Java");
@@ -50,8 +50,8 @@ public class GoogleSearchAutoSuggestion {
             break;
           }
         }
-        Assert.assertTrue(page.title().contains(selectedText));
-        Assert.assertTrue(page.locator("textarea[name='q']").textContent().contains(selectedText));
+       assertTrue(page.title().contains(selectedText));
+       assertTrue(page.locator("textarea[name='q']").textContent().contains(selectedText));
 
 //        Utility.captureLocatorScreenshot(page.locator("textarea[name='q']"));
 //        Utility.capturePageScreenshot(page);
