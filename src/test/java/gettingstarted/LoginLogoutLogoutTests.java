@@ -5,8 +5,8 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.assertions.PlaywrightAssertions;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class LoginLogoutLogoutTests {
   @Test
@@ -28,7 +28,7 @@ public class LoginLogoutLogoutTests {
         String title = page.title();
 
 //        PlaywrightAssertions.assertThat(page).hasTitle("Learn Automation Courses");
-        Assert.assertTrue(page.title().contains("Learn Automation Courses"));
+        assertTrue(page.title().contains("Learn Automation Courses"));
 
 
 //        page.locator("#email1").fill("admin@email.com");
@@ -42,7 +42,7 @@ public class LoginLogoutLogoutTests {
         page.getByAltText("menu").click();
         page.getByText("sign out").click();
 //        PlaywrightAssertions.assertThat(page).hasURL(Pattern.compile("login"));
-        Assert.assertTrue(page.url().contains("login"));
+        assertTrue(page.url().contains("login"));
 //        page.waitForTimeout(3*1000);
         System.out.println("I am inside loginTest end");
       }

@@ -32,5 +32,4 @@ import org.junit.platform.suite.api.Suite;
 @ConfigurationParameter(key = Constants.PLUGIN_PROPERTY_NAME, value = "pretty, rerun:target/rerun.txt, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm")
 
 public class TestRunner {
-
 }
